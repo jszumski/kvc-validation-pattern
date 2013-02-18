@@ -264,6 +264,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KVC Validation Pattern/KVC Validation Pattern-Prefix.pch";
 				INFOPLIST_FILE = "KVC Validation Pattern/KVC Validation Pattern-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -275,6 +276,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KVC Validation Pattern/KVC Validation Pattern-Prefix.pch";
 				INFOPLIST_FILE = "KVC Validation Pattern/KVC Validation Pattern-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -74,6 +74,16 @@ typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
 	return nil;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	if (section == CTVViewControllerSectionHistoricalPrices &&
+		[self tableView:tableView numberOfRowsInSection:section] == 0) {
+		
+		return NSLocalizedString(@"No historical information is available.", nil);
+	}
+	
+	return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *cellId = @"value1Cell";
 	
@@ -195,7 +205,7 @@ typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
 			
 			
 		case 3:
-			/* Response D: historicalPrices is a dictionary instead of an array
+			/* Response D: historicalPrices is a single object instead of an array
 			 
 			 {
 				 "description":"7/11 Fake St.",
