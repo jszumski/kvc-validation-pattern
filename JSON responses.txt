@@ -1,0 +1,86 @@
+A:
+{
+	"description":"7/11 Fake St.",
+	"price":3.50,
+	"sellsDiesel": true,
+	"address": {
+		"street":"123 Fake Street",
+		"city":"Newark",
+		"state":"NJ",
+		"zip":"07105"
+	},
+	"historicalPrices":[
+		{
+			"date":"2013-02-18T15:43:24-05:00",
+			"price":4.60
+		}
+	]
+}
+
+
+B:
+{
+	"description":"7/11 Fake St.",
+	"price":"$3.50",
+	"sellsDiesel": "yes",
+	"address": {
+		"street":"123 Fake Street",
+		"city":"Newark",
+		"state":"NJ",
+		"zip":7105
+	},
+	"historicalPrices":[
+		{
+			"date":"2013-02-18T15:43:24-05:00",
+			"price":"$4.60"
+		}
+	]
+}
+
+
+C:
+{
+	"description":"7/11 Fake St.",
+	"price":4,
+	"sellsDiesel": 1,
+	"address": {
+		"street":"123 Fake Street",
+		"city":"Newark",
+		"state":"NJ",
+		"zip":7105
+	},
+	"historicalPrices":[
+		{
+			"date":1361202204,
+			"price":4.6
+		}
+	]
+}
+
+
+D:
+{
+	"description":"7/11 Fake St.",
+	"price":3.5,
+	"sellsDiesel": true,
+	"address": {
+		"street":"123 Fake Street",
+		"city":"Newark",
+		"state":"NJ",
+		"zip":"07105"
+	},
+	"historicalPrices":{
+		"date":"2013-02-18T15:43:24-05:00",
+		"price":4.60
+	}
+}
+
+
+E:
+{
+	"description":null,
+	"price":null,
+	"sellsDiesel": null,
+	"address":"error looking up address",
+	"historicalPrices":"error fetching prices"
+}

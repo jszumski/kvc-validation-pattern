@@ -13,6 +13,7 @@ typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
 	CTVViewControllerSectionHistoricalPrices	= 1
 };
 
+
 @implementation CTCViewController
 
 - (void)viewDidLoad {
@@ -108,6 +109,129 @@ typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
 	}
 
 	return cell;
+}
+
+
+#pragma mark - JSON responses
+
+- (NSString*)jsonStringForResponse:(NSUInteger)responseIndex {
+	switch (responseIndex) {
+		case 0:
+		default:
+			/* Response A: happy path
+			 
+			 {
+				 "description":"7/11 Fake St.",
+				 "price":3.50,
+				 "sellsDiesel": true,
+				 "address": {
+					 "street":"123 Fake Street",
+					 "city":"Newark",
+					 "state":"NJ",
+					 "zip":"07105"
+				 },
+				 "historicalPrices":[
+					 {
+						 "date":"2013-02-18T15:43:24-05:00",
+						 "price":4.60
+					 }
+				 ]
+			 }
+			 
+			 */
+			
+			return @"{ \"description\":\"7/11 Fake St.\", \"price\":3.50, \"sellsDiesel\": true, \"address\": { \"street\":\"123 Fake Street\", \"city\":\"Newark\", \"state\":\"NJ\", \"zip\":\"07105\" }, \"historicalPrices\":[ { \"date\":\"2013-02-18T15:43:24-05:00\", \"price\":4.60 } ] }";
+			
+		case 1:
+			/* Response B: price & sellsDiesel are strings, zip is an integer
+			 
+			 {
+				 "description":"7/11 Fake St.",
+				 "price":"$3.50",
+				 "sellsDiesel": "yes",
+				 "address": {
+					 "street":"123 Fake Street",
+					 "city":"Newark",
+					 "state":"NJ",
+					 "zip":7105
+				 },
+				 "historicalPrices":[
+					 {
+						 "date":"2013-02-18T15:43:24-05:00",
+						 "price":"$4.60"
+					 }
+				 ]
+			 }
+			 
+			 */
+			
+			return @"{ \"description\":\"7/11 Fake St.\", \"price\":\"$3.50\", \"sellsDiesel\": \"yes\", \"address\": { \"street\":\"123 Fake Street\", \"city\":\"Newark\", \"state\":\"NJ\", \"zip\":7105 }, \"historicalPrices\":[ { \"date\":\"2013-02-18T15:43:24-05:00\", \"price\":\"$4.60\" } ] }";
+			
+			
+		case 2:
+			/* Response C: price & sellsDiesel are integers, historicalPrices/price is a decimal, date is a UNIX timestamp
+			 
+			 {
+				 "description":"7/11 Fake St.",
+				 "price":4,
+				 "sellsDiesel": 1,
+				 "address": {
+					 "street":"123 Fake Street",
+					 "city":"Newark",
+					 "state":"NJ",
+					 "zip":7105
+				 },
+				 "historicalPrices":[
+					 {
+						 "date":1361202204,
+						 "price":4.6
+					 }
+				 ]
+			 }
+			 
+			 */
+			
+			return @"{ \"description\":\"7/11 Fake St.\", \"price\":4, \"sellsDiesel\": 1, \"address\": { \"street\":\"123 Fake Street\", \"city\":\"Newark\", \"state\":\"NJ\", \"zip\":7105 }, \"historicalPrices\":[ { \"date\":1361202204, \"price\":4.6 } ] }";
+			
+			
+		case 3:
+			/* Response D: historicalPrices is a dictionary instead of an array
+			 
+			 {
+				 "description":"7/11 Fake St.",
+				 "price":3.50,
+				 "sellsDiesel": true,
+				 "address": {
+					 "street":"123 Fake Street",
+					 "city":"Newark",
+					 "state":"NJ",
+					 "zip":"07105"
+				 },
+				 "historicalPrices":{
+					 "date":"2013-02-18T15:43:24-05:00",
+					 "price":4.60
+				 }
+			 }
+			 
+			 */
+			
+			return @"{ \"description\":\"7/11 Fake St.\", \"price\":3.50, \"sellsDiesel\": true, \"address\": { \"street\":\"123 Fake Street\", \"city\":\"Newark\", \"state\":\"NJ\", \"zip\":\"07105\" }, \"historicalPrices\":{ \"date\":\"2013-02-18T15:43:24-05:00\", \"price\":4.60 } }";
+			
+		case 4:
+			/* Response E: description, price and sellsDiesel are null; address and historicalPrices are strings
+			 
+			 {
+				 "description":null,
+				 "price":null,
+				 "sellsDiesel": null,
+				 "address":"error looking up address",
+				 "historicalPrices":"error fetching prices"
+			 }
+			 
+			 */
+			
+			return @"{ \"description\":null, \"price\":null, \"sellsDiesel\": null, \"address\":\"error looking up address\", \"historicalPrices\":\"error fetching prices\" }";
+	}
 }
 
 @end
