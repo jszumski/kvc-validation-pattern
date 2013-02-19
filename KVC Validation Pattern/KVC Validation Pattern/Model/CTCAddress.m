@@ -10,8 +10,10 @@
 #import "CTCAddress.h"
 
 
-@implementation CTCAddress {
+@implementation CTCAddress
 
+- (NSString *)description {
+	return [[super description] stringByAppendingFormat:@" (street=\"%@\", city=\"%@\", state=\"%@\", zip=\"%@\"", self.street, self.city, self.state, self.zip];
 }
 
 @end

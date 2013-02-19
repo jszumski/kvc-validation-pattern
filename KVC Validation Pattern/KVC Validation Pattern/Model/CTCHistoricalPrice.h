@@ -13,7 +13,7 @@
 
 @interface CTCHistoricalPrice : CTCBaseModel
 
-@property (nonatomic, strong) NSDate *date;
-@property (nonatomic, assign) float price;
+@property (nonatomic, strong) NSDate	*date;
+@property (nonatomic, assign) CGFloat	price;
 
 @end

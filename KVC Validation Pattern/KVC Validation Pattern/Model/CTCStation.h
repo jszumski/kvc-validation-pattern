@@ -15,10 +15,10 @@
 
 @interface CTCStation : CTCBaseModel
 
-@property (nonatomic, strong) NSString *stationName;
-@property (nonatomic, strong) CTCAddress *address;
-@property (nonatomic, assign) BOOL sellsDiesel;
-@property (nonatomic, assign) float price;
-@property (nonatomic, strong) NSArray *historicalPrices;
+@property (nonatomic, strong) NSString		*stationName;
+@property (nonatomic, strong) CTCAddress	*address;
+@property (nonatomic, assign) BOOL			sellsDiesel;
+@property (nonatomic, assign) CGFloat		price;
+@property (nonatomic, strong) NSArray		*historicalPrices;
 
 @end

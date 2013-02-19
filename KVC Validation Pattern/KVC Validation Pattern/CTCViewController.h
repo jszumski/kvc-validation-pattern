@@ -10,6 +10,7 @@
 
 @interface CTCViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property(nonatomic,strong) IBOutlet UITextView			*sourceTextView;
 @property(nonatomic,strong) IBOutlet UITableView		*tableView;
 @property(nonatomic,strong) IBOutlet UIBarButtonItem	*viewJSONButton;
 @property(nonatomic,strong) IBOutlet UISegmentedControl	*responseSegmentedControl;

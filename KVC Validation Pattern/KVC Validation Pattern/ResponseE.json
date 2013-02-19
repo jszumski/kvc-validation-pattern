@@ -1,0 +1,7 @@
+{
+	"description":null,
+	"price":null,
+	"sellsDiesel": null,
+	"address":"error looking up address",
+	"historicalPrices":"error fetching prices"
+}

@@ -7,17 +7,27 @@
 //
 
 #import "CTCViewController.h"
+#import "CTCStation.h"
+#import "CTCAddress.h"
+#import "CTCHistoricalPrice.h"
 
-typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
-	CTVViewControllerSectionInfo				= 0,
-	CTVViewControllerSectionHistoricalPrices	= 1
+typedef NS_ENUM(NSUInteger, CTCViewControllerSection) {
+	CTCViewControllerSectionInfo				= 0,
+	CTCViewControllerSectionHistoricalPrices	= 1
 };
 
 
-@implementation CTCViewController
+@implementation CTCViewController {
+	CTCStation			*_currentStation;
+	NSNumberFormatter	*_priceFormatter;
+	NSDateFormatter		*_dateFormatter;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	// hide the source view by default
+	self.sourceTextView.hidden = YES;
 	
 	// register for segmented control changes
 	[self.responseSegmentedControl addTarget:self
@@ -28,15 +38,59 @@ typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
 	[self responseSegmentedControlDidChange:self.responseSegmentedControl];
 }
 
+- (void)displayInfoForStation:(CTCStation*)station {
+	_currentStation = station;
+	
+	NSLog(@"%@", station);
+	
+	[self.tableView reloadData];
+}
+
 
 #pragma mark - UI response
 
 - (IBAction)viewJSONTapped:(id)sender {
 	NSLog(@"View JSON tapped");
+	
+	// toggle source view
+	if (self.sourceTextView.hidden == YES) {
+		self.sourceTextView.hidden = NO;
+		self.tableView.hidden = YES;
+		
+		self.viewJSONButton.title = NSLocalizedString(@"Hide JSON", nil);
+			
+	} else {
+		self.sourceTextView.hidden = YES;
+		self.tableView.hidden = NO;
+		
+		self.viewJSONButton.title = NSLocalizedString(@"Show JSON", nil);
+	}
 }
 
 - (void)responseSegmentedControlDidChange:(id)sender {
 	NSLog(@"Response changed to %@", [self.responseSegmentedControl titleForSegmentAtIndex:self.responseSegmentedControl.selectedSegmentIndex]);
+	
+	NSString *json = [self jsonStringForResponse:self.responseSegmentedControl.selectedSegmentIndex];
+	
+	
+	// update source view
+	self.sourceTextView.text = json;
+	
+	
+	// parse and update station
+	NSError *error = nil;
+	NSDictionary *stationDictionary = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]
+																	  options:kNilOptions
+																		error:&error];
+
+	if (error != nil) {
+		NSLog(@"Unable to parse JSON into store:\n %@", json);
+		return;
+	}
+	
+	CTCStation *newStation = [[CTCStation alloc] init];
+	[newStation setValuesForKeysWithDictionary:stationDictionary];
+	[self displayInfoForStation:newStation];
 }
 
 
@@ -47,11 +101,11 @@ typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section == CTVViewControllerSectionInfo) {
+	if (section == CTCViewControllerSectionInfo) {
 		return 4;
 		
-	} else if (section == CTVViewControllerSectionHistoricalPrices) {
-		return 4;
+	} else if (section == CTCViewControllerSectionHistoricalPrices) {
+		return [_currentStation.historicalPrices count];
 	}
 	
 	return 0;
@@ -59,7 +113,7 @@ typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	// make the Address cell tall enough for two lines
-	if (indexPath.section == CTVViewControllerSectionInfo && indexPath.row == 3) {
+	if (indexPath.section == CTCViewControllerSectionInfo && indexPath.row == 3) {
 		return 66.0;
 	}
 	
@@ -67,7 +121,7 @@ typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if (section == CTVViewControllerSectionHistoricalPrices) {
+	if (section == CTCViewControllerSectionHistoricalPrices) {
 		return NSLocalizedString(@"Historical Prices", nil);
 	}
 	
@@ -75,7 +129,7 @@ typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-	if (section == CTVViewControllerSectionHistoricalPrices &&
+	if (section == CTCViewControllerSectionHistoricalPrices &&
 		[self tableView:tableView numberOfRowsInSection:section] == 0) {
 		
 		return NSLocalizedString(@"No historical information is available.", nil);
@@ -90,32 +144,42 @@ typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
 	
 	if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
-		
-		cell.detailTextLabel.numberOfLines = 2;
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];		
 	}
 	
-	if (indexPath.section == CTVViewControllerSectionInfo) {
+	cell.detailTextLabel.numberOfLines = 1;
+	
+	if (indexPath.section == CTCViewControllerSectionInfo) {
+
 		if (indexPath.row == 0) {
 			cell.textLabel.text = NSLocalizedString(@"Name", nil);
-			cell.detailTextLabel.text = @"Example Station";
+			cell.detailTextLabel.text = _currentStation.stationName;
 			
 		} else if (indexPath.row == 1) {
 			cell.textLabel.text = NSLocalizedString(@"Price", nil);
-			cell.detailTextLabel.text = @"$3.50";
+			cell.detailTextLabel.text = [self stringForPrice:_currentStation.price];
 		
 		} else if (indexPath.row == 2) {
 			cell.textLabel.text = NSLocalizedString(@"Sells Diesel", nil);
-			cell.detailTextLabel.text = @"Yes";
+			cell.detailTextLabel.text = _currentStation.sellsDiesel ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 			
 		} else if (indexPath.row == 3) {
+			CTCAddress *address = _currentStation.address;
+			
 			cell.textLabel.text = NSLocalizedString(@"Address", nil);
-			cell.detailTextLabel.text = @"123 Fake Street\nRichmond, VA 23229";
+			
+			if (address != nil) {
+				cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n %@, %@ %@", address.street, address.city, address.state, address.zip];
+			}
+			
+			cell.detailTextLabel.numberOfLines = 2;
 		}
 	
-	} else if (indexPath.section == CTVViewControllerSectionHistoricalPrices) {
-		cell.textLabel.text = @"1/1/11";
-		cell.detailTextLabel.text = @"$3.50";
+	} else if (indexPath.section == CTCViewControllerSectionHistoricalPrices) {
+		CTCHistoricalPrice *historicalPrice = [_currentStation.historicalPrices objectAtIndex:indexPath.row];
+		
+		cell.textLabel.text = [self stringForDate:historicalPrice.date];
+		cell.detailTextLabel.text = [self stringForPrice:historicalPrice.price];
 	}
 
 	return cell;
@@ -125,123 +189,59 @@ typedef NS_ENUM(NSUInteger, CTVViewControllerSection) {
 #pragma mark - JSON responses
 
 - (NSString*)jsonStringForResponse:(NSUInteger)responseIndex {
+	NSString *filename = nil;
+	
 	switch (responseIndex) {
 		case 0:
 		default:
-			/* Response A: happy path
-			 
-			 {
-				 "description":"7/11 Fake St.",
-				 "price":3.50,
-				 "sellsDiesel": true,
-				 "address": {
-					 "street":"123 Fake Street",
-					 "city":"Newark",
-					 "state":"NJ",
-					 "zip":"07105"
-				 },
-				 "historicalPrices":[
-					 {
-						 "date":"2013-02-18T15:43:24-05:00",
-						 "price":4.60
-					 }
-				 ]
-			 }
-			 
-			 */
-			
-			return @"{ \"description\":\"7/11 Fake St.\", \"price\":3.50, \"sellsDiesel\": true, \"address\": { \"street\":\"123 Fake Street\", \"city\":\"Newark\", \"state\":\"NJ\", \"zip\":\"07105\" }, \"historicalPrices\":[ { \"date\":\"2013-02-18T15:43:24-05:00\", \"price\":4.60 } ] }";
+			filename = @"ResponseA";
+			break;
 			
 		case 1:
-			/* Response B: price & sellsDiesel are strings, zip is an integer
-			 
-			 {
-				 "description":"7/11 Fake St.",
-				 "price":"$3.50",
-				 "sellsDiesel": "yes",
-				 "address": {
-					 "street":"123 Fake Street",
-					 "city":"Newark",
-					 "state":"NJ",
-					 "zip":7105
-				 },
-				 "historicalPrices":[
-					 {
-						 "date":"2013-02-18T15:43:24-05:00",
-						 "price":"$4.60"
-					 }
-				 ]
-			 }
-			 
-			 */
-			
-			return @"{ \"description\":\"7/11 Fake St.\", \"price\":\"$3.50\", \"sellsDiesel\": \"yes\", \"address\": { \"street\":\"123 Fake Street\", \"city\":\"Newark\", \"state\":\"NJ\", \"zip\":7105 }, \"historicalPrices\":[ { \"date\":\"2013-02-18T15:43:24-05:00\", \"price\":\"$4.60\" } ] }";
-			
+			filename = @"ResponseB";
+			break;
 			
 		case 2:
-			/* Response C: price & sellsDiesel are integers, historicalPrices/price is a decimal, date is a UNIX timestamp
-			 
-			 {
-				 "description":"7/11 Fake St.",
-				 "price":4,
-				 "sellsDiesel": 1,
-				 "address": {
-					 "street":"123 Fake Street",
-					 "city":"Newark",
-					 "state":"NJ",
-					 "zip":7105
-				 },
-				 "historicalPrices":[
-					 {
-						 "date":1361202204,
-						 "price":4.6
-					 }
-				 ]
-			 }
-			 
-			 */
-			
-			return @"{ \"description\":\"7/11 Fake St.\", \"price\":4, \"sellsDiesel\": 1, \"address\": { \"street\":\"123 Fake Street\", \"city\":\"Newark\", \"state\":\"NJ\", \"zip\":7105 }, \"historicalPrices\":[ { \"date\":1361202204, \"price\":4.6 } ] }";
-			
+			filename = @"ResponseC";
+			break;
 			
 		case 3:
-			/* Response D: historicalPrices is a single object instead of an array
-			 
-			 {
-				 "description":"7/11 Fake St.",
-				 "price":3.50,
-				 "sellsDiesel": true,
-				 "address": {
-					 "street":"123 Fake Street",
-					 "city":"Newark",
-					 "state":"NJ",
-					 "zip":"07105"
-				 },
-				 "historicalPrices":{
-					 "date":"2013-02-18T15:43:24-05:00",
-					 "price":4.60
-				 }
-			 }
-			 
-			 */
-			
-			return @"{ \"description\":\"7/11 Fake St.\", \"price\":3.50, \"sellsDiesel\": true, \"address\": { \"street\":\"123 Fake Street\", \"city\":\"Newark\", \"state\":\"NJ\", \"zip\":\"07105\" }, \"historicalPrices\":{ \"date\":\"2013-02-18T15:43:24-05:00\", \"price\":4.60 } }";
+			filename = @"ResponseD";
+			break;
 			
 		case 4:
-			/* Response E: description, price and sellsDiesel are null; address and historicalPrices are strings
-			 
-			 {
-				 "description":null,
-				 "price":null,
-				 "sellsDiesel": null,
-				 "address":"error looking up address",
-				 "historicalPrices":"error fetching prices"
-			 }
-			 
-			 */
-			
-			return @"{ \"description\":null, \"price\":null, \"sellsDiesel\": null, \"address\":\"error looking up address\", \"historicalPrices\":\"error fetching prices\" }";
+			filename = @"ResponseE";
+			break;
 	}
+	
+	return [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:filename ofType:@"json"] encoding:NSUTF8StringEncoding error:nil];
+}
+
+
+#pragma mark - Formatting
+
+- (NSString*)stringForPrice:(CGFloat)price {
+	// this can only be called from the main thread
+	static dispatch_once_t priceFormatterOnceToken;
+	dispatch_once(&priceFormatterOnceToken, ^{
+		_priceFormatter = [[NSNumberFormatter alloc] init];
+		[_priceFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+	});
+	
+	return [_priceFormatter stringFromNumber:[NSNumber numberWithFloat:price]];
+}
+
+- (NSString*)stringForDate:(NSDate*)date {
+	// this can only be called from the main thread
+	
+	static dispatch_once_t dateFormatterOnceToken;
+	dispatch_once(&dateFormatterOnceToken, ^{
+		_dateFormatter = [[NSDateFormatter alloc] init];
+		[_dateFormatter setDateStyle:NSDateFormatterShortStyle];
+		[_dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+	});
+	
+	return [_dateFormatter stringFromDate:date];
 }
 
 @end

@@ -1,0 +1,17 @@
+{
+	"description":"7/11 Fake St.",
+	"price":4,
+	"sellsDiesel": 1,
+	"address": {
+		"street":"123 Fake Street",
+		"city":"Newark",
+		"state":"NJ",
+		"zip":7105
+	},
+	"historicalPrices":[
+		{
+			"date":1361202204,
+			"price":4.6
+		}
+	]
+}

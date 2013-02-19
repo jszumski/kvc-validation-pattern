@@ -10,8 +10,10 @@
 #import "CTCHistoricalPrice.h"
 
 
-@implementation CTCHistoricalPrice {
+@implementation CTCHistoricalPrice
 
+- (NSString *)description {
+	return [[super description] stringByAppendingFormat:@" (date=%@, price=%f)", self.date, self.price];
 }
 
 @end
