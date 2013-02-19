@@ -18,6 +18,23 @@
 		0331CC1816D2BC340037911A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0331CC1716D2BC340037911A /* Default-568h@2x.png */; };
 		0331CC1B16D2BC340037911A /* CTCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0331CC1A16D2BC340037911A /* CTCViewController.m */; };
 		0331CC1E16D2BC340037911A /* CTCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0331CC1C16D2BC340037911A /* CTCViewController.xib */; };
+		D1A960CA1CD295B23407E722 /* CTCFloatTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A960AB8D8D5F2608D1D05C /* CTCFloatTypeValidator.m */; };
+		D1A9612D29BDD99669FA0318 /* CTCDateTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96B13B681A0BF8B33277F /* CTCDateTypeValidator.m */; };
+		D1A961558ADE642EBB7A278D /* CTCStation.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96109D2CD25E51B9DC18F /* CTCStation.m */; };
+		D1A9621C56912347ADCFE486 /* CTCBaseModelValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96F977C69F2AEB680CF33 /* CTCBaseModelValidator.m */; };
+		D1A96393A51F39EB36C09B15 /* CTCNumberTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96431BB0178BFF883997B /* CTCNumberTypeValidator.m */; };
+		D1A96420C22B3EE0EC8B3302 /* CTCBooleanTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96AC4326DB106A6B7A748 /* CTCBooleanTypeValidator.m */; };
+		D1A965A8D4879E9760B90CC0 /* CTCDoubleTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96EBE1A57032C1359BB0D /* CTCDoubleTypeValidator.m */; };
+		D1A966991653B11B5E87F508 /* CTCBaseValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96B0273E016C33D792DD3 /* CTCBaseValidator.m */; };
+		D1A966A3389F1134D28145A1 /* CTCHistoricalPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A963FA34856D738D23FCE5 /* CTCHistoricalPrice.m */; };
+		D1A966E4FCD1AEB29818902A /* CTCAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96DAB6710395F2577CAA3 /* CTCAddress.m */; };
+		D1A9677609D8EFF77241C201 /* CTCArrayTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A965D6EE2DC8E368276665 /* CTCArrayTypeValidator.m */; };
+		D1A96840AAD0A01D4EC67395 /* CTCBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96FDA94E719E970ACD8D1 /* CTCBaseModel.m */; };
+		D1A9691945674836A09D2BC8 /* NSString+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96C133C16E9532FEA9D77 /* NSString+Utilities.m */; };
+		D1A9694E6EBF067748CF7520 /* CTCDictionaryTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96F8FFAE93D1CA79F847E /* CTCDictionaryTypeValidator.m */; };
+		D1A96C04F57F99ECCA398A35 /* CTCStringTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A969301137DB19C2E681C4 /* CTCStringTypeValidator.m */; };
+		D1A96E7A320FB5300C08EC25 /* CTCIntegerTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A965882BA8DE414198C4BB /* CTCIntegerTypeValidator.m */; };
+		D1A96EA0F0A13B39EAD6002F /* CTCUnsignedIntegerTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A9633A6D221155B7466BCC /* CTCUnsignedIntegerTypeValidator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +54,41 @@
 		0331CC1916D2BC340037911A /* CTCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTCViewController.h; sourceTree = "<group>"; };
 		0331CC1A16D2BC340037911A /* CTCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTCViewController.m; sourceTree = "<group>"; };
 		0331CC1D16D2BC340037911A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CTCViewController.xib; sourceTree = "<group>"; };
+		D1A960242C2D383AC3DEAC1C /* CTCIntegerTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCIntegerTypeValidator.h; sourceTree = "<group>"; };
+		D1A9603D974FAEAA5655C472 /* CTCDictionaryTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCDictionaryTypeValidator.h; sourceTree = "<group>"; };
+		D1A9608DF3D8068F64698BC3 /* CTCUnsignedIntegerTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCUnsignedIntegerTypeValidator.h; sourceTree = "<group>"; };
+		D1A960AB8D8D5F2608D1D05C /* CTCFloatTypeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCFloatTypeValidator.m; sourceTree = "<group>"; };
+		D1A960BB8118621FAC9EC597 /* CTCBaseModelValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCBaseModelValidator.h; sourceTree = "<group>"; };
+		D1A96109D2CD25E51B9DC18F /* CTCStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCStation.m; sourceTree = "<group>"; };
+		D1A961ED56103D603228633F /* CTCBooleanTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCBooleanTypeValidator.h; sourceTree = "<group>"; };
+		D1A9631937B4815842753788 /* ValidationFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidationFunctions.h; sourceTree = "<group>"; };
+		D1A9633A6D221155B7466BCC /* CTCUnsignedIntegerTypeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCUnsignedIntegerTypeValidator.m; sourceTree = "<group>"; };
+		D1A9634AAEA04A7DAC761FB9 /* CTCStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCStation.h; sourceTree = "<group>"; };
+		D1A963B4A978AB7D6900FAEC /* CTCDoubleTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCDoubleTypeValidator.h; sourceTree = "<group>"; };
+		D1A963FA34856D738D23FCE5 /* CTCHistoricalPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCHistoricalPrice.m; sourceTree = "<group>"; };
+		D1A96431BB0178BFF883997B /* CTCNumberTypeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCNumberTypeValidator.m; sourceTree = "<group>"; };
+		D1A964B154B9C3E18DF2E026 /* CTCNumberTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCNumberTypeValidator.h; sourceTree = "<group>"; };
+		D1A965882BA8DE414198C4BB /* CTCIntegerTypeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCIntegerTypeValidator.m; sourceTree = "<group>"; };
+		D1A965D6EE2DC8E368276665 /* CTCArrayTypeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCArrayTypeValidator.m; sourceTree = "<group>"; };
+		D1A967B31A2F6F35B7A26450 /* CTCStringTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCStringTypeValidator.h; sourceTree = "<group>"; };
+		D1A9682FCF8E44DE2645C622 /* CTCBaseValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCBaseValidator.h; sourceTree = "<group>"; };
+		D1A96919538C61431C404BCD /* CTCDateTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCDateTypeValidator.h; sourceTree = "<group>"; };
+		D1A969301137DB19C2E681C4 /* CTCStringTypeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCStringTypeValidator.m; sourceTree = "<group>"; };
+		D1A9697EA73C7580ADBD935A /* NSString+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utilities.h"; sourceTree = "<group>"; };
+		D1A96A254F4AF318022696FB /* CTCHistoricalPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCHistoricalPrice.h; sourceTree = "<group>"; };
+		D1A96A4A42FF9FB0178DA2BD /* CTCAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCAddress.h; sourceTree = "<group>"; };
+		D1A96AC4326DB106A6B7A748 /* CTCBooleanTypeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCBooleanTypeValidator.m; sourceTree = "<group>"; };
+		D1A96AC843999D5242A3C415 /* CTCBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCBaseModel.h; sourceTree = "<group>"; };
+		D1A96B0273E016C33D792DD3 /* CTCBaseValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCBaseValidator.m; sourceTree = "<group>"; };
+		D1A96B13B681A0BF8B33277F /* CTCDateTypeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCDateTypeValidator.m; sourceTree = "<group>"; };
+		D1A96B6E1AD55C1C9EC59F97 /* CTCArrayTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCArrayTypeValidator.h; sourceTree = "<group>"; };
+		D1A96C133C16E9532FEA9D77 /* NSString+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utilities.m"; sourceTree = "<group>"; };
+		D1A96C839902F7B92E090955 /* CTCFloatTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCFloatTypeValidator.h; sourceTree = "<group>"; };
+		D1A96DAB6710395F2577CAA3 /* CTCAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCAddress.m; sourceTree = "<group>"; };
+		D1A96EBE1A57032C1359BB0D /* CTCDoubleTypeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCDoubleTypeValidator.m; sourceTree = "<group>"; };
+		D1A96F8FFAE93D1CA79F847E /* CTCDictionaryTypeValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCDictionaryTypeValidator.m; sourceTree = "<group>"; };
+		D1A96F977C69F2AEB680CF33 /* CTCBaseModelValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCBaseModelValidator.m; sourceTree = "<group>"; };
+		D1A96FDA94E719E970ACD8D1 /* CTCBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCBaseModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +141,7 @@
 				0331CC1A16D2BC340037911A /* CTCViewController.m */,
 				0331CC1C16D2BC340037911A /* CTCViewController.xib */,
 				0331CC0816D2BC330037911A /* Supporting Files */,
+				D1A9640FB1434F9E98A40B64 /* Model */,
 			);
 			path = "KVC Validation Pattern";
 			sourceTree = "<group>";
@@ -105,6 +158,56 @@
 				0331CC1716D2BC340037911A /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D1A9640FB1434F9E98A40B64 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D1A96FDA94E719E970ACD8D1 /* CTCBaseModel.m */,
+				D1A96AC843999D5242A3C415 /* CTCBaseModel.h */,
+				D1A96C133C16E9532FEA9D77 /* NSString+Utilities.m */,
+				D1A9697EA73C7580ADBD935A /* NSString+Utilities.h */,
+				D1A9649CC08AFC85AF889CE2 /* Validation */,
+				D1A96109D2CD25E51B9DC18F /* CTCStation.m */,
+				D1A9634AAEA04A7DAC761FB9 /* CTCStation.h */,
+				D1A96DAB6710395F2577CAA3 /* CTCAddress.m */,
+				D1A96A4A42FF9FB0178DA2BD /* CTCAddress.h */,
+				D1A963FA34856D738D23FCE5 /* CTCHistoricalPrice.m */,
+				D1A96A254F4AF318022696FB /* CTCHistoricalPrice.h */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D1A9649CC08AFC85AF889CE2 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				D1A96B6E1AD55C1C9EC59F97 /* CTCArrayTypeValidator.h */,
+				D1A965D6EE2DC8E368276665 /* CTCArrayTypeValidator.m */,
+				D1A9682FCF8E44DE2645C622 /* CTCBaseValidator.h */,
+				D1A96B0273E016C33D792DD3 /* CTCBaseValidator.m */,
+				D1A961ED56103D603228633F /* CTCBooleanTypeValidator.h */,
+				D1A96AC4326DB106A6B7A748 /* CTCBooleanTypeValidator.m */,
+				D1A96919538C61431C404BCD /* CTCDateTypeValidator.h */,
+				D1A96B13B681A0BF8B33277F /* CTCDateTypeValidator.m */,
+				D1A96C839902F7B92E090955 /* CTCFloatTypeValidator.h */,
+				D1A960AB8D8D5F2608D1D05C /* CTCFloatTypeValidator.m */,
+				D1A964B154B9C3E18DF2E026 /* CTCNumberTypeValidator.h */,
+				D1A96431BB0178BFF883997B /* CTCNumberTypeValidator.m */,
+				D1A967B31A2F6F35B7A26450 /* CTCStringTypeValidator.h */,
+				D1A969301137DB19C2E681C4 /* CTCStringTypeValidator.m */,
+				D1A965882BA8DE414198C4BB /* CTCIntegerTypeValidator.m */,
+				D1A960242C2D383AC3DEAC1C /* CTCIntegerTypeValidator.h */,
+				D1A96F8FFAE93D1CA79F847E /* CTCDictionaryTypeValidator.m */,
+				D1A9603D974FAEAA5655C472 /* CTCDictionaryTypeValidator.h */,
+				D1A9633A6D221155B7466BCC /* CTCUnsignedIntegerTypeValidator.m */,
+				D1A9608DF3D8068F64698BC3 /* CTCUnsignedIntegerTypeValidator.h */,
+				D1A96EBE1A57032C1359BB0D /* CTCDoubleTypeValidator.m */,
+				D1A963B4A978AB7D6900FAEC /* CTCDoubleTypeValidator.h */,
+				D1A96F977C69F2AEB680CF33 /* CTCBaseModelValidator.m */,
+				D1A960BB8118621FAC9EC597 /* CTCBaseModelValidator.h */,
+				D1A9631937B4815842753788 /* ValidationFunctions.h */,
+			);
+			path = Validation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +280,23 @@
 				0331CC0E16D2BC330037911A /* main.m in Sources */,
 				0331CC1216D2BC330037911A /* CTCAppDelegate.m in Sources */,
 				0331CC1B16D2BC340037911A /* CTCViewController.m in Sources */,
+				D1A96840AAD0A01D4EC67395 /* CTCBaseModel.m in Sources */,
+				D1A9691945674836A09D2BC8 /* NSString+Utilities.m in Sources */,
+				D1A966991653B11B5E87F508 /* CTCBaseValidator.m in Sources */,
+				D1A96C04F57F99ECCA398A35 /* CTCStringTypeValidator.m in Sources */,
+				D1A96420C22B3EE0EC8B3302 /* CTCBooleanTypeValidator.m in Sources */,
+				D1A96393A51F39EB36C09B15 /* CTCNumberTypeValidator.m in Sources */,
+				D1A960CA1CD295B23407E722 /* CTCFloatTypeValidator.m in Sources */,
+				D1A9677609D8EFF77241C201 /* CTCArrayTypeValidator.m in Sources */,
+				D1A9612D29BDD99669FA0318 /* CTCDateTypeValidator.m in Sources */,
+				D1A961558ADE642EBB7A278D /* CTCStation.m in Sources */,
+				D1A966E4FCD1AEB29818902A /* CTCAddress.m in Sources */,
+				D1A966A3389F1134D28145A1 /* CTCHistoricalPrice.m in Sources */,
+				D1A96E7A320FB5300C08EC25 /* CTCIntegerTypeValidator.m in Sources */,
+				D1A9694E6EBF067748CF7520 /* CTCDictionaryTypeValidator.m in Sources */,
+				D1A96EA0F0A13B39EAD6002F /* CTCUnsignedIntegerTypeValidator.m in Sources */,
+				D1A965A8D4879E9760B90CC0 /* CTCDoubleTypeValidator.m in Sources */,
+				D1A9621C56912347ADCFE486 /* CTCBaseModelValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
