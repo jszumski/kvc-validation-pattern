@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, CTCPropertyType){
 };
 
 @implementation CTCBaseModel {
-
+    dispatch_once_t keyToken;
 }
 static NSMutableDictionary *modelProperties;
 static  dispatch_once_t onceToken;
@@ -49,13 +49,19 @@ static NSArray *propertyTypesArray;
     [modelProperties setObject:translateNameDict forKey:[self calculateClassName]];
 }
 
-- (id)initWithDictionary:(NSDictionary *)jsonObject {
+- (id)initWithDictionary:(NSDictionary *)dictionary {
     self = [self init];
     if (self){
-        _dictionaryKey = [[self class] calculateClassName];
-        [self setValuesForKeysWithDictionary:jsonObject];
+        [self setValuesForKeysWithDictionary:dictionary];
     }
     return self;
+}
+
+- (NSString *)dictionaryKey {
+    dispatch_once(&keyToken, ^{
+        _dictionaryKey = [[self class] calculateClassName];
+    });
+    return _dictionaryKey;
 }
 
 #pragma mark - KVC methods

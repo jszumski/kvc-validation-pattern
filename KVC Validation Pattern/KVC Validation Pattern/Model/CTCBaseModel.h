@@ -15,7 +15,7 @@
 @property (nonatomic, strong, readonly) NSString *dictionaryKey;
 @property (nonatomic, readonly, strong) NSDictionary *undefinedKeys;
 
-- (id)initWithDictionary:(NSDictionary *)jsonObject;
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 + (NSString *)calculateClassName;
 
