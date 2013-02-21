@@ -19,7 +19,7 @@
     if (self) {
         self.defaultValidation = ^NSNumber * (id value, BOOL *isValid, NSError **error){
             *isValid = YES;
-            NSString *stringValue;
+            NSString *stringValue = @"NO";
             if ([value isKindOfClass:[NSString class]]){
                 stringValue = value;
             } else if ([value respondsToSelector:@selector(stringValue)]){

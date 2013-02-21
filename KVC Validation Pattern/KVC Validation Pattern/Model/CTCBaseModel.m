@@ -81,8 +81,7 @@ static NSArray *propertyTypesArray;
     }
 
     NSError *error = nil;
-    BOOL isValid = YES;
-    [self validateValue:&value forKey:key error:&error];
+    BOOL isValid = [self validateValue:&value forKey:key error:&error];
 
     if (isValid) {
         [super setValue:value forKey:key];

@@ -170,7 +170,9 @@ typedef NS_ENUM(NSUInteger, CTCViewControllerSection) {
 			
 			if (address != nil) {
 				cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n %@, %@ %@", address.street, address.city, address.state, address.zip];
-			}
+			} else {
+                cell.detailTextLabel.text = @"";
+            }
 			
 			cell.detailTextLabel.numberOfLines = 2;
 		}

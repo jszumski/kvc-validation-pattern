@@ -8,6 +8,7 @@
 
 
 #import "CTCFloatTypeValidator.h"
+#import "NSString+Utilities.h"
 
 
 @implementation CTCFloatTypeValidator {
@@ -18,6 +19,9 @@
     if (self) {
         self.defaultValidation = ^NSNumber * (id value, BOOL *isValid, NSError **error){
             *isValid = YES;
+            if ([value isKindOfClass:[NSString class]]){
+                value = [NSString stripNonNumericCharacters:value];
+            }
             if ([value respondsToSelector:@selector(floatValue)]){
                 return @([value floatValue]);
             }
