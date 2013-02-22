@@ -11,7 +11,7 @@
 #import "NSString+Utilities.h"
 #import "ValidationFunctions.h"
 
-#define kPropertyTypesArray @[@"Unknown",@"NSString", @"c", @"NSNumber", @"i", @"f", @"NSArray", @"NSMutableArray", @"NSDictionary", @"NSMutableDictionary", @"I", @"NSDate", @"d"]
+#define kPropertyTypesArray @[@"Unknown",@"NSString", [NSString stringWithFormat:@"%s",@encode(BOOL)], @"NSNumber", @"i", @"f", @"NSArray", @"NSMutableArray", @"NSDictionary", @"NSMutableDictionary", @"I", @"NSDate", @"d"]
 
 typedef NS_ENUM(NSUInteger, CTCPropertyType){
     CTCPropertyUnknown = 0, /**< Property type is unknown */
@@ -28,6 +28,12 @@ typedef NS_ENUM(NSUInteger, CTCPropertyType){
             CTCPropertyTypeDate, /**< Property is an NSDate */
             CTCPropertyTypeDouble /**< Property is a double */
 };
+
+@interface CTCBaseModel ()
+
+@property (nonatomic, readwrite, strong) NSString *dictionaryKey;
+
+@end
 
 @implementation CTCBaseModel {
     dispatch_once_t keyToken;
