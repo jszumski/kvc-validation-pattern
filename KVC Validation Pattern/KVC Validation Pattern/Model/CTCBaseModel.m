@@ -11,22 +11,20 @@
 #import "NSString+Utilities.h"
 #import "ValidationFunctions.h"
 
-#define kPropertyTypesArray @[@"Unknown",@"NSString", [NSString stringWithFormat:@"%s",@encode(BOOL)], @"NSNumber", @"i", @"f", @"NSArray", @"NSMutableArray", @"NSDictionary", @"NSMutableDictionary", @"I", @"NSDate", @"d"]
-
 typedef NS_ENUM(NSUInteger, CTCPropertyType){
-    CTCPropertyUnknown = 0, /**< Property type is unknown */
-            CTCPropertyTypeString, /**< Property is an NSString */
-            CTCPropertyTypeBool, /**< Property is a BOOL */
-            CTCPropertyTypeNumber, /**< Property is an NSNumber */
-            CTCPropertyTypeInteger, /**< Property is an NSInteger */
-            CTCPropertyTypeFloat, /**< Property is a float */
-            CTCPropertyTypeArray, /**< Property is an NSArray */
-            CTCPropertyTypeMutableArray, /**< Property is an NSMutableArray */
-            CTCPropertyTypeDictionary, /**< Property is an NSDictionary */
-            CTCPropertyTypeMutableDictionary, /**< Property is an NSMutableDictionary */
-            CTCPropertyTypeUnsignedInteger, /**< Property is an NSUInteger */
-            CTCPropertyTypeDate, /**< Property is an NSDate */
-            CTCPropertyTypeDouble /**< Property is a double */
+    CTCPropertyUnknown = 0,				// Property type is unknown
+	CTCPropertyTypeString,				// Property is an NSString
+	CTCPropertyTypeBool,				// Property is a BOOL
+	CTCPropertyTypeNumber,				// Property is an NSNumber
+	CTCPropertyTypeInteger,				// Property is an NSInteger
+	CTCPropertyTypeFloat,				// Property is a float
+	CTCPropertyTypeArray,				// Property is an NSArray
+	CTCPropertyTypeMutableArray,		// Property is an NSMutableArray
+	CTCPropertyTypeDictionary,			// Property is an NSDictionary
+	CTCPropertyTypeMutableDictionary,	// Property is an NSMutableDictionary
+	CTCPropertyTypeUnsignedInteger,		// Property is an NSUInteger
+	CTCPropertyTypeDate,				// Property is an NSDate
+	CTCPropertyTypeDouble				// Property is a double
 };
 
 @interface CTCBaseModel ()
@@ -47,9 +45,23 @@ static NSArray *propertyTypesArray;
 
     dispatch_once(&onceToken, ^{
         modelProperties = [NSMutableDictionary dictionary];
-        propertyTypesArray = kPropertyTypesArray;
+		
+		// note this array's indexes MUST match the CTCPropertyType enum values for lookups to work properly
+        propertyTypesArray = @[@"Unknown",												// CTCPropertyUnknown
+							   @"NSString",												// CTCPropertyTypeString
+							   [NSString stringWithFormat:@"%s",@encode(BOOL)],			// CTCPropertyTypeBool
+							   @"NSNumber",												// CTCPropertyTypeNumber
+							   [NSString stringWithFormat:@"%s",@encode(int)],			// CTCPropertyTypeInteger
+							   [NSString stringWithFormat:@"%s",@encode(float)],		// CTCPropertyTypeFloat
+							   @"NSArray",												// CTCPropertyTypeArray
+							   @"NSMutableArray",										// CTCPropertyTypeMutableArray
+							   @"NSDictionary",											// CTCPropertyTypeDictionary
+							   @"NSMutableDictionary",									// CTCPropertyTypeMutableDictionary
+							   [NSString stringWithFormat:@"%s",@encode(unsigned int)],	// CTCPropertyTypeUnsignedInteger
+							   @"NSDate",												// CTCPropertyTypeDate
+							   [NSString stringWithFormat:@"%s",@encode(double)]];		// CTCPropertyTypeDouble
     });
-
+	
     NSMutableDictionary *translateNameDict = [NSMutableDictionary dictionary];
     [self hydrateModelProperties:[self class] translateDictionary:translateNameDict];
     [modelProperties setObject:translateNameDict forKey:[self calculateClassName]];

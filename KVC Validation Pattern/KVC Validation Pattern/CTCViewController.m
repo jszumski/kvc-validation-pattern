@@ -40,9 +40,7 @@ typedef NS_ENUM(NSUInteger, CTCViewControllerSection) {
 
 - (void)displayInfoForStation:(CTCStation*)station {
 	_currentStation = station;
-	
-	NSLog(@"%@", station);
-	
+		
 	[self.tableView reloadData];
 }
 
@@ -68,8 +66,6 @@ typedef NS_ENUM(NSUInteger, CTCViewControllerSection) {
 }
 
 - (void)responseSegmentedControlDidChange:(id)sender {
-	NSLog(@"Response changed to %@", [self.responseSegmentedControl titleForSegmentAtIndex:self.responseSegmentedControl.selectedSegmentIndex]);
-	
 	NSString *json = [self jsonStringForResponse:self.responseSegmentedControl.selectedSegmentIndex];
 	
 	
@@ -155,13 +151,16 @@ typedef NS_ENUM(NSUInteger, CTCViewControllerSection) {
 			cell.textLabel.text = NSLocalizedString(@"Name", nil);
 			cell.detailTextLabel.text = _currentStation.stationName;
 			
+			
 		} else if (indexPath.row == 1) {
 			cell.textLabel.text = NSLocalizedString(@"Price", nil);
 			cell.detailTextLabel.text = [self stringForPrice:_currentStation.price];
 		
+			
 		} else if (indexPath.row == 2) {
 			cell.textLabel.text = NSLocalizedString(@"Sells Diesel", nil);
 			cell.detailTextLabel.text = _currentStation.sellsDiesel ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
+			
 			
 		} else if (indexPath.row == 3) {
 			CTCAddress *address = _currentStation.address;
@@ -171,7 +170,7 @@ typedef NS_ENUM(NSUInteger, CTCViewControllerSection) {
 			if (address != nil) {
 				cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n %@, %@ %@", address.street, address.city, address.state, address.zip];
 			} else {
-                cell.detailTextLabel.text = @"";
+                cell.detailTextLabel.text = @"\n "; // prevents Address label from jumping around between real and empty strings
             }
 			
 			cell.detailTextLabel.numberOfLines = 2;
