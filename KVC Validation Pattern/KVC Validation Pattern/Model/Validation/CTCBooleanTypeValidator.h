@@ -12,4 +12,5 @@
 
 
 @interface CTCBooleanTypeValidator : CTCNumberTypeValidator
+
 @end

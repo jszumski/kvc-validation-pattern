@@ -12,4 +12,5 @@
 
 
 @interface CTCArrayTypeValidator : CTCBaseValidator
+
 @end

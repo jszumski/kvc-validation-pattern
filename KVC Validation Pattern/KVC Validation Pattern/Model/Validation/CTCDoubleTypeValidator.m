@@ -10,11 +10,11 @@
 #import "CTCDoubleTypeValidator.h"
 
 
-@implementation CTCDoubleTypeValidator {
+@implementation CTCDoubleTypeValidator
 
-}
 - (id)init {
     self = [super init];
+	
     if (self) {
         self.defaultValidation = ^NSNumber * (id value, BOOL *isValid, NSError **error){
             *isValid = NO;

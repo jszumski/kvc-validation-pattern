@@ -10,9 +10,8 @@
 #import "CTCBaseValidator.h"
 
 
-@implementation CTCBaseValidator {
+@implementation CTCBaseValidator
 
-}
 - (BOOL)validateValue:(id *)value error:(NSError **)error {
     if (!self.isValid){
         if (self.defaultValidation) {
@@ -29,6 +28,7 @@
 
 - (id)initWithDefaultValidation:(CTCDefaultValidation)defaultValidation {
     self = [self init];
+	
     if (self){
         _defaultValidation = defaultValidation;
     }
@@ -38,12 +38,12 @@
 
 - (id)initWithPostValidation:(CTCPostValidation)postValidation {
     self = [self init];
+	
     if (self){
         _postValidation = postValidation;
     }
 
     return self;
 }
-
 
 @end

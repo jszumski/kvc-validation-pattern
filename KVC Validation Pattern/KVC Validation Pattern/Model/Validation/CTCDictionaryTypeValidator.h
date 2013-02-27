@@ -12,4 +12,5 @@
 
 
 @interface CTCDictionaryTypeValidator : CTCBaseValidator
+
 @end

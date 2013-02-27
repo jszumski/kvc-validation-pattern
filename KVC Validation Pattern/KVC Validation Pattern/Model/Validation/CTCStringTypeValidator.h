@@ -12,4 +12,5 @@
 
 
 @interface CTCStringTypeValidator : CTCBaseValidator
+
 @end

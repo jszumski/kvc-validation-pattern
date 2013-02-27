@@ -10,11 +10,11 @@
 #import "CTCStringTypeValidator.h"
 
 
-@implementation CTCStringTypeValidator {
+@implementation CTCStringTypeValidator
 
-}
 - (id)init {
     self = [super init];
+	
     if (self) {
         self.defaultValidation = ^NSString *(id value, BOOL *isValid, NSError **error){
             if ([value respondsToSelector:@selector(stringValue)]){

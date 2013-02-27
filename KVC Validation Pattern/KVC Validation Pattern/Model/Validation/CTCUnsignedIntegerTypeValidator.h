@@ -12,4 +12,5 @@
 
 
 @interface CTCUnsignedIntegerTypeValidator : CTCBaseValidator
+
 @end

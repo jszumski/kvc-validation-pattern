@@ -10,16 +10,11 @@
 #import "CTCNumberTypeValidator.h"
 
 
-@implementation CTCNumberTypeValidator {
-
-}
-- (BOOL)validateValue:(id *)value error:(NSError **)error {
-    _isValid = [*value isKindOfClass:[NSNumber class]];
-    return [super validateValue:value error:error];
-}
+@implementation CTCNumberTypeValidator
 
 - (id)init {
     self = [super init];
+	
     if (self) {
         self.defaultValidation = ^NSNumber * (id value, BOOL *isValid, NSError **error){
             *isValid = YES;
@@ -29,6 +24,11 @@
     }
 
     return self;
+}
+
+- (BOOL)validateValue:(id *)value error:(NSError **)error {
+    _isValid = [*value isKindOfClass:[NSNumber class]];
+    return [super validateValue:value error:error];
 }
 
 @end

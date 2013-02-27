@@ -27,18 +27,24 @@ typedef NS_ENUM(NSUInteger, CTCPropertyType){
 	CTCPropertyTypeDouble				// Property is a double
 };
 
+
 @interface CTCBaseModel ()
 
 @property (nonatomic, readwrite, strong) NSString *dictionaryKey;
 
 @end
 
+
 @implementation CTCBaseModel {
     dispatch_once_t keyToken;
 }
+
 static NSMutableDictionary *modelProperties; // Dictionary used to convert json key's into classes proper-cased keys
 static  dispatch_once_t onceToken;
 static NSArray *propertyTypesArray;
+
+
+#pragma mark - Class methods
 
 + (void)initialize {
     [super initialize];
@@ -72,79 +78,6 @@ static NSArray *propertyTypesArray;
     [modelProperties setObject:translateNameDict forKey:[self calculateClassName]];
 }
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-    self = [self init];
-    if (self){
-        // This is where all the KVC magic begins.  This method can be called on an object that has already been
-        // created.  This is just a convenience initializer.  The same thing could be accomplished in the following manner:
-        //
-        //   MySubClass *subClass = [MySubClass new];
-        //  [subClass setValuesForKeysWithDictionary:dictionary];
-        [self setValuesForKeysWithDictionary:dictionary];
-    }
-    return self;
-}
-
-- (NSString *)dictionaryKey {
-    // This will cause this key to be generated once, on a per-class/per-instance basis.  This is done
-    // because the logic in calculateClassName can be rather expensive when called repeatedly on
-    // every property, for every class.
-    dispatch_once(&keyToken, ^{
-        _dictionaryKey = [[self class] calculateClassName];
-    });
-    return _dictionaryKey;
-}
-
-#pragma mark - KVC methods
-
-- (void)setValue:(id)value forKey:(NSString *)key {
-    // We can assume at this point, the key is not in proper case.  We will call the set value method
-    // with proper casing NO and it will figure out the proper casing for the key (if it can)
-    [self setValue:value forKey:key properCase:NO];
-}
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
-    // We will look in the undefinedKeys Dictionary (should be defined in the subclass), and look for
-    // this undefined key to see if the class maps the key to a know key.  This method is called automatically
-    // by KVC if setValue:forKey: cannot find a property to match the key.  Also, we wanted to implement
-    // this method in the base class, because the default implementation of this on NSObject throws
-    // an exception.
-    NSString *newKey = self.undefinedKeys[[key lowercaseString]];
-    if (newKey){
-        // If we have found the key, we will call our set value for key with proper case set to YES because
-        // the key should be put into the dictionary in proper case.  If it is not, this will not work, and our value
-        // will never be set.
-        [self setValue:value forKey:newKey properCase:YES];
-    }
-}
-
-- (void)setValue:(id)value forKey:(NSString *)key properCase:(BOOL)properCase {
-    // We first check to see if the key is already in proper case.  If not, we'll make it proper case.  This is done
-    // because calling lowerCaseString on a string value can get expensive when called repeatedly.  That is what
-    // will happen when setting a classes values from a dictionary as it will iteratively call setValue:forKey: on every
-    // key it finds in the dictionary.
-    if (!properCase) {
-        NSString *lowerCaseKey = [key lowercaseString];
-        // We do the lookup in the modelProperties dictionary for the proper cased key.  If we find it, we change
-        // the key to be that value.
-        NSString *properKey = modelProperties[self.dictionaryKey][lowerCaseKey];
-        if (properKey){
-            key = properKey;
-        }
-    }
-
-    NSError *error = nil;
-    // Here we call the validation logic.  Calling validateValue:forKey:error: will cause validate<key>:error: to be called
-    // so all the validation methods we added dynamically to this class in initialize will no be utilised.
-    BOOL isValid = [self validateValue:&value forKey:key error:&error];
-
-    // We only want to set the value if the value is valid.
-    if (isValid) {
-        [super setValue:value forKey:key];
-    }
-}
-
-
 + (NSString *)calculateClassName {
     // This method is here because sometimes NSStringFromClass will return the class name with a - and some characters
     // after the class name.
@@ -163,7 +96,7 @@ static NSArray *propertyTypesArray;
     if (!class || class == [NSObject class]){
         return;
     }
-
+	
     unsigned int outCount, i;
     // Get the class property list.
     objc_property_t *properties = class_copyPropertyList(class, &outCount);
@@ -207,7 +140,7 @@ static NSArray *propertyTypesArray;
             propertyType = (const char *)[[NSData dataWithBytes:(attribute + 3) length:strlen(attribute) - 4] bytes];
         }
     }
-
+	
     return [[NSString alloc] initWithCString:propertyType encoding:NSUTF8StringEncoding];
 }
 
@@ -217,13 +150,13 @@ static NSArray *propertyTypesArray;
 
     // Look up the string property type in the propertyTypes array
     NSUInteger n = [propertyTypesArray indexOfObject:propertyType];
-
+	
     if (n == NSNotFound){
         type = CTCPropertyUnknown;
     } else {
         type = (CTCPropertyType)n;
     }
-
+	
     switch (type){
         case CTCPropertyTypeString:
             implementation = (IMP)validateStringProperty;
@@ -271,6 +204,82 @@ static NSArray *propertyTypesArray;
 
 +(NSString *)generateValidationMethodName:(NSString *)key{
     return [NSString stringWithFormat:@"validate%@:error:", [NSString capitalizeFirstCharacter:key]];
+}
+
+
+#pragma mark - Life cycle
+
+- (id)initWithDictionary:(NSDictionary *)dictionary {
+    self = [self init];
+    if (self){
+        // This is where all the KVC magic begins.  This method can be called on an object that has already been
+        // created.  This is just a convenience initializer.  The same thing could be accomplished in the following manner:
+        //
+        //   MySubClass *subClass = [MySubClass new];
+        //  [subClass setValuesForKeysWithDictionary:dictionary];
+        [self setValuesForKeysWithDictionary:dictionary];
+    }
+    return self;
+}
+
+- (NSString *)dictionaryKey {
+    // This will cause this key to be generated once, on a per-class/per-instance basis.  This is done
+    // because the logic in calculateClassName can be rather expensive when called repeatedly on
+    // every property, for every class.
+    dispatch_once(&keyToken, ^{
+        _dictionaryKey = [[self class] calculateClassName];
+    });
+    return _dictionaryKey;
+}
+
+
+#pragma mark - KVC methods
+
+- (void)setValue:(id)value forKey:(NSString *)key {
+    // We can assume at this point, the key is not in proper case.  We will call the set value method
+    // with proper casing NO and it will figure out the proper casing for the key (if it can)
+    [self setValue:value forKey:key properCase:NO];
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    // We will look in the undefinedKeys Dictionary (should be defined in the subclass), and look for
+    // this undefined key to see if the class maps the key to a know key.  This method is called automatically
+    // by KVC if setValue:forKey: cannot find a property to match the key.  Also, we wanted to implement
+    // this method in the base class, because the default implementation of this on NSObject throws
+    // an exception.
+    NSString *newKey = self.undefinedKeys[[key lowercaseString]];
+    if (newKey){
+        // If we have found the key, we will call our set value for key with proper case set to YES because
+        // the key should be put into the dictionary in proper case.  If it is not, this will not work, and our value
+        // will never be set.
+        [self setValue:value forKey:newKey properCase:YES];
+    }
+}
+
+- (void)setValue:(id)value forKey:(NSString *)key properCase:(BOOL)properCase {
+    // We first check to see if the key is already in proper case.  If not, we'll make it proper case.  This is done
+    // because calling lowerCaseString on a string value can get expensive when called repeatedly.  That is what
+    // will happen when setting a classes values from a dictionary as it will iteratively call setValue:forKey: on every
+    // key it finds in the dictionary.
+    if (!properCase) {
+        NSString *lowerCaseKey = [key lowercaseString];
+        // We do the lookup in the modelProperties dictionary for the proper cased key.  If we find it, we change
+        // the key to be that value.
+        NSString *properKey = modelProperties[self.dictionaryKey][lowerCaseKey];
+        if (properKey){
+            key = properKey;
+        }
+    }
+	
+    NSError *error = nil;
+    // Here we call the validation logic.  Calling validateValue:forKey:error: will cause validate<key>:error: to be called
+    // so all the validation methods we added dynamically to this class in initialize will no be utilised.
+    BOOL isValid = [self validateValue:&value forKey:key error:&error];
+	
+    // We only want to set the value if the value is valid.
+    if (isValid) {
+        [super setValue:value forKey:key];
+    }
 }
 
 @end

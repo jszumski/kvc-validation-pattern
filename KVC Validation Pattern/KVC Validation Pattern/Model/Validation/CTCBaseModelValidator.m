@@ -11,21 +11,24 @@
 #import "CTCBaseModel.h"
 
 
-@implementation CTCBaseModelValidator {
+@implementation CTCBaseModelValidator
 
-}
 - (id)initWithClass:(Class)baseModelClass {
     self = [super init];
+	
     if (self){
         __weak Class blockModelClass = baseModelClass;
         self.postValidation = ^CTCBaseModel *(id value){
             return [[blockModelClass alloc] initWithDictionary:value];
         };
     }
+	
     return self;
 }
+
 - (id)initWithDefaultValidation:(CTCDefaultValidation)defaultValidation {
     self = [self init];
+	
     if (self) {
         self.defaultValidation = defaultValidation;
     }

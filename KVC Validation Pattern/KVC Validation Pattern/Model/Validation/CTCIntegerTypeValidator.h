@@ -12,4 +12,5 @@
 
 
 @interface CTCIntegerTypeValidator : CTCNumberTypeValidator
+
 @end

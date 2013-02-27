@@ -10,11 +10,11 @@
 #import "CTCIntegerTypeValidator.h"
 
 
-@implementation CTCIntegerTypeValidator {
+@implementation CTCIntegerTypeValidator
 
-}
 - (id)init {
     self = [super init];
+	
     if (self) {
         self.defaultValidation = ^NSNumber * (id value, BOOL *isValid, NSError **error){
             *isValid = YES;

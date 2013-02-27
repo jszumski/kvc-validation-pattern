@@ -9,11 +9,11 @@
 
 #import "CTCDateTypeValidator.h"
 
-@implementation CTCDateTypeValidator {
+@implementation CTCDateTypeValidator
 
-}
 - (id)init {
     self = [super init];
+	
     if (self) {
         self.defaultValidation = ^NSDate *(id value, BOOL *isValid, NSError **error){
             if ([value isKindOfClass:[NSNumber class]]){

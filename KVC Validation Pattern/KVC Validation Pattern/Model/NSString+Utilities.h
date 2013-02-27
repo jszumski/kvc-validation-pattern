@@ -12,9 +12,7 @@
 @interface NSString (Utilities)
 
 + (NSString *)capitalizeFirstCharacter:(NSString *)string;
-
 + (NSString *)stripNonNumericCharacters:(NSString *)string;
-
 + (NSString *)leftPadString:(NSString *)string length:(NSUInteger)length padCharacter:(NSString *)padCharacter;
 
 @end

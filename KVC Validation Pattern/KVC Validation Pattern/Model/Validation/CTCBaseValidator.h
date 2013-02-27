@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 
 typedef id (^CTCDefaultValidation) (id value, BOOL *isValid, NSError **error);
-typedef id (^CTCPostValidation)(id value);
+typedef id (^CTCPostValidation) (id value);
 
 @interface CTCBaseValidator : NSObject  {
 @protected
@@ -23,8 +23,8 @@ typedef id (^CTCPostValidation)(id value);
 
 - (BOOL)validateValue:(id *)value error:(NSError **)error;
 
--(id)initWithDefaultValidation:(CTCDefaultValidation)defaultValidation;
+- (id)initWithDefaultValidation:(CTCDefaultValidation)defaultValidation;
 
--(id)initWithPostValidation:(CTCPostValidation)postValidation;
+- (id)initWithPostValidation:(CTCPostValidation)postValidation;
 
 @end

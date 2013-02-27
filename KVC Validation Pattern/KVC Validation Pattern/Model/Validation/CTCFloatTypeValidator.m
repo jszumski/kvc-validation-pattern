@@ -11,9 +11,8 @@
 #import "NSString+Utilities.h"
 
 
-@implementation CTCFloatTypeValidator {
+@implementation CTCFloatTypeValidator
 
-}
 - (id)init {
     self = [super init];
     if (self) {

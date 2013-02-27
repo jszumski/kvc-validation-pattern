@@ -10,9 +10,7 @@
 #import "CTCArrayTypeValidator.h"
 
 
-@implementation CTCArrayTypeValidator {
-
-}
+@implementation CTCArrayTypeValidator
 
 - (BOOL)validateValue:(id *)value error:(NSError **)error {
     _isValid = [*value isKindOfClass:[NSArray class]];
@@ -21,6 +19,7 @@
 
 - (id)init {
     self = [super init];
+	
     if (self) {
         self.defaultValidation = ^NSArray * (id value, BOOL *isValid, NSError **error){
             *isValid = NO;

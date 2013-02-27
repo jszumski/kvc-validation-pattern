@@ -12,4 +12,5 @@
 
 
 @interface CTCFloatTypeValidator : CTCNumberTypeValidator
+
 @end

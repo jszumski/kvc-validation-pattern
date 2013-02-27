@@ -44,6 +44,35 @@ typedef NS_ENUM(NSUInteger, CTCViewControllerSection) {
 	[self.tableView reloadData];
 }
 
+- (NSString*)jsonStringForResponse:(NSUInteger)responseIndex {
+	NSString *filename = nil;
+	
+	switch (responseIndex) {
+		case 0:
+		default:
+			filename = @"ResponseA";
+			break;
+			
+		case 1:
+			filename = @"ResponseB";
+			break;
+			
+		case 2:
+			filename = @"ResponseC";
+			break;
+			
+		case 3:
+			filename = @"ResponseD";
+			break;
+			
+		case 4:
+			filename = @"ResponseE";
+			break;
+	}
+	
+	return [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:filename ofType:@"json"] encoding:NSUTF8StringEncoding error:nil];
+}
+
 
 #pragma mark - UI response
 
@@ -184,38 +213,6 @@ typedef NS_ENUM(NSUInteger, CTCViewControllerSection) {
 	}
 
 	return cell;
-}
-
-
-#pragma mark - JSON responses
-
-- (NSString*)jsonStringForResponse:(NSUInteger)responseIndex {
-	NSString *filename = nil;
-	
-	switch (responseIndex) {
-		case 0:
-		default:
-			filename = @"ResponseA";
-			break;
-			
-		case 1:
-			filename = @"ResponseB";
-			break;
-			
-		case 2:
-			filename = @"ResponseC";
-			break;
-			
-		case 3:
-			filename = @"ResponseD";
-			break;
-			
-		case 4:
-			filename = @"ResponseE";
-			break;
-	}
-	
-	return [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:filename ofType:@"json"] encoding:NSUTF8StringEncoding error:nil];
 }
 
 

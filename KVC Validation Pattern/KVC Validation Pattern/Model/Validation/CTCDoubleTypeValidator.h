@@ -12,4 +12,5 @@
 
 
 @interface CTCDoubleTypeValidator : CTCNumberTypeValidator
+
 @end
