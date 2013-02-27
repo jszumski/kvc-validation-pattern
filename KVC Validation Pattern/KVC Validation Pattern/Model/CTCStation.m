@@ -41,6 +41,13 @@
             }
             return histories;
         }];
+        _historyValidator.defaultValidation = ^NSArray *(id value, BOOL *isValid, NSError **error){
+            if ([value isKindOfClass:[NSDictionary class]]){
+                *isValid = YES;
+                return @[value];
+            }
+            return nil;
+        };
     });
 
     return [_historyValidator validateValue:ioValue error:outError];
