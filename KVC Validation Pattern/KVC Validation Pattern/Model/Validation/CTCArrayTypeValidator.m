@@ -12,11 +12,6 @@
 
 @implementation CTCArrayTypeValidator
 
-- (BOOL)validateValue:(id *)value error:(NSError **)error {
-    _isValid = [*value isKindOfClass:[NSArray class]];
-    return [super validateValue:value error:error];
-}
-
 - (id)init {
     self = [super init];
 	
@@ -28,6 +23,11 @@
     }
 
     return self;
+}
+
+- (BOOL)validateValue:(id *)value error:(NSError **)error {
+    _isValid = [*value isKindOfClass:[NSArray class]];
+    return [super validateValue:value error:error];
 }
 
 @end
