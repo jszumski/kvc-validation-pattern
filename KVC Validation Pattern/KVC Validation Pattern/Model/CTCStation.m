@@ -33,20 +33,23 @@
 
 - (BOOL)validateHistoricalPrices:(id *)ioValue error:(NSError *__autoreleasing *)outError{
     dispatch_once(&_historyToken, ^{
-        _historyValidator = [[CTCArrayTypeValidator alloc] initWithPostValidation:^NSArray *(id value){
+		// if this happens to be a single object (i.e. a dictionary) then assume it was supposed to be an array of one element
+        _historyValidator = [[CTCArrayTypeValidator alloc] initWithDefaultValidation:^NSArray *(id value, BOOL *isValid, NSError **error){
+            if ([value isKindOfClass:[NSDictionary class]]){
+                *isValid = YES;
+                return @[value];
+            }
+            return nil;
+        }];
+		
+		// take the array we are given and process its contents as CTCHistoricalPrice objects
+        _historyValidator.postValidation = ^NSArray *(id value){
             NSMutableArray *histories = [NSMutableArray array];
             for (NSDictionary *dict in value){
                 CTCHistoricalPrice *price = [[CTCHistoricalPrice alloc] initWithDictionary:dict];
                 [histories addObject:price];
             }
             return histories;
-        }];
-        _historyValidator.defaultValidation = ^NSArray *(id value, BOOL *isValid, NSError **error){
-            if ([value isKindOfClass:[NSDictionary class]]){
-                *isValid = YES;
-                return @[value];
-            }
-            return nil;
         };
     });
 

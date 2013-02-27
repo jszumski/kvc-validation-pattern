@@ -76,9 +76,7 @@ typedef NS_ENUM(NSUInteger, CTCViewControllerSection) {
 
 #pragma mark - UI response
 
-- (IBAction)viewJSONTapped:(id)sender {
-	NSLog(@"View JSON tapped");
-	
+- (IBAction)viewJSONTapped:(id)sender {	
 	// toggle source view
 	if (self.sourceTextView.hidden == YES) {
 		self.sourceTextView.hidden = NO;
