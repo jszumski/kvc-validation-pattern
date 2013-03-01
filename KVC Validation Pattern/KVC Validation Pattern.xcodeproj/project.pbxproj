@@ -23,6 +23,8 @@
 		0331CCCC16D3F87A0037911A /* ResponseC.json in Resources */ = {isa = PBXBuildFile; fileRef = 0331CCCB16D3F87A0037911A /* ResponseC.json */; };
 		0331CCD016D3F8BB0037911A /* ResponseD.json in Resources */ = {isa = PBXBuildFile; fileRef = 0331CCCF16D3F8BB0037911A /* ResponseD.json */; };
 		0331CCD216D3F8CB0037911A /* ResponseE.json in Resources */ = {isa = PBXBuildFile; fileRef = 0331CCD116D3F8CA0037911A /* ResponseE.json */; };
+		0389943A16E1082D009275E8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0389943816E1082D009275E8 /* Icon.png */; };
+		0389943B16E1082D009275E8 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0389943916E1082D009275E8 /* Icon@2x.png */; };
 		D1A960CA1CD295B23407E722 /* CTCFloatTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A960AB8D8D5F2608D1D05C /* CTCFloatTypeValidator.m */; };
 		D1A9612D29BDD99669FA0318 /* CTCDateTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96B13B681A0BF8B33277F /* CTCDateTypeValidator.m */; };
 		D1A961558ADE642EBB7A278D /* CTCStation.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A96109D2CD25E51B9DC18F /* CTCStation.m */; };
@@ -64,6 +66,8 @@
 		0331CCCB16D3F87A0037911A /* ResponseC.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ResponseC.json; sourceTree = "<group>"; };
 		0331CCCF16D3F8BB0037911A /* ResponseD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ResponseD.json; sourceTree = "<group>"; };
 		0331CCD116D3F8CA0037911A /* ResponseE.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ResponseE.json; sourceTree = "<group>"; };
+		0389943816E1082D009275E8 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		0389943916E1082D009275E8 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		D1A960242C2D383AC3DEAC1C /* CTCIntegerTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCIntegerTypeValidator.h; sourceTree = "<group>"; };
 		D1A9603D974FAEAA5655C472 /* CTCDictionaryTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCDictionaryTypeValidator.h; sourceTree = "<group>"; };
 		D1A9608DF3D8068F64698BC3 /* CTCUnsignedIntegerTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCUnsignedIntegerTypeValidator.h; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 				0331CCCF16D3F8BB0037911A /* ResponseD.json */,
 				0331CCD116D3F8CA0037911A /* ResponseE.json */,
 				D1A9640FB1434F9E98A40B64 /* Model */,
+				0389943316E1059C009275E8 /* Images */,
 				0331CC0816D2BC330037911A /* Supporting Files */,
 			);
 			path = "KVC Validation Pattern";
@@ -168,11 +173,20 @@
 				0331CC0A16D2BC330037911A /* InfoPlist.strings */,
 				0331CC0D16D2BC330037911A /* main.m */,
 				0331CC0F16D2BC330037911A /* KVC Validation Pattern-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0389943316E1059C009275E8 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0389943816E1082D009275E8 /* Icon.png */,
+				0389943916E1082D009275E8 /* Icon@2x.png */,
 				0331CC1316D2BC340037911A /* Default.png */,
 				0331CC1516D2BC340037911A /* Default@2x.png */,
 				0331CC1716D2BC340037911A /* Default-568h@2x.png */,
 			);
-			name = "Supporting Files";
+			name = Images;
 			sourceTree = "<group>";
 		};
 		D1A9640FB1434F9E98A40B64 /* Model */ = {
@@ -287,6 +301,8 @@
 				0331CCCC16D3F87A0037911A /* ResponseC.json in Resources */,
 				0331CCD016D3F8BB0037911A /* ResponseD.json in Resources */,
 				0331CCD216D3F8CB0037911A /* ResponseE.json in Resources */,
+				0389943A16E1082D009275E8 /* Icon.png in Resources */,
+				0389943B16E1082D009275E8 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
